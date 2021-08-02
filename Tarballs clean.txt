@@ -1,0 +1,2 @@
+#####################Attempt to clean the environment but this will remove all R packages - tried this due to the severe issues with installing SF package in r (multiple safety issues potentially relating to corrupt packages or packages in the wrong path).
+conda clean --packages --tarballs

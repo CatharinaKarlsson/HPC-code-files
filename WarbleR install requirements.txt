@@ -1,0 +1,17 @@
+####################################################################################
+#for warbleR
+####################################################################################
+
+#conda install -c conda-forge fftw
+conda install -c conda-forge r-fftw
+
+#package bioacoustics need cmake
+conda install -c anaconda cmake
+
+#install warbleR
+nohup Rscript AcoustcPackageInstallationWarbleR.R > nohup2.out &
+nohup Rscript ExtractInfoOnWorkingFilesHPC.R > nohup2.out &
+
+#other packages
+conda install -c conda-forge r-lubridate
+conda install -c conda-forge r-stringr

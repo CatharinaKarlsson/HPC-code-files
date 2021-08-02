@@ -1,0 +1,20 @@
+####################################################################################
+##################### Soundecology installation requirements , have to be done in r versions above 4, issues with R base in version 3
+####################################################################################
+conda create --name r4-base
+
+conda activate r4-base
+conda install -c conda-forge r-base
+conda install -c conda-forge/label/gcc7 r-base
+
+#now when checking R version it should be 4.0.3
+R —version
+
+#now try and install the depends that cause issues with sound ecology
+conda install -c conda-forge r-units
+conda install -c conda-forge r-sf
+conda install -c conda-forge r-oce
+
+
+#then install sound ecology using script
+nohup Rscript AcoustcPackageInstallationSoundecology.R &

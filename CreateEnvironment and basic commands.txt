@@ -1,0 +1,65 @@
+#log into HPC with
+ssh myusername@hpcadress -p portnumber
+
+#move into correct folder
+cd Catharina/Awesomeprojects
+
+#check nodes that are active and move into one that is suitable. Do not use management console or super node ( “console02” etc or “smp”). Use lsload to see available nodes and then ssh into an available node
+lsload
+ssh c0112
+
+#create a new environment
+conda create -n myenvironmentname
+
+#move into correct environment
+conda activate myenvironmentname
+
+#to check available environments 
+conda info --envs
+
+#use crt + z to move out of a program such as R
+
+#the place you are working from should now say: (phenology) [myusername@c0104 Catharina/Awesomeprojects]$
+#now you can start installing packages
+
+#if conda need to be installed download it first for linux 64bit x86 from https://www.anaconda.com/products/individual
+
+#install R if it is not already and specify version
+R —version #to check version
+conda install -c r r=3.4.0
+
+#for phenology:
+conda install -c conda-forge r-readr
+conda install -c r r-dplyr
+conda install -c conda-forge r-factoextra
+conda install -c r r-cluster
+conda install -c r r-doparallel
+conda install -c r r-tidyr
+conda install -c conda-forge r-purrr
+conda install -c r r-ggplot2
+
+#to install packages for R
+conda install r-package_name
+
+#for rgdal the code is
+conda install --channel condo-forge/label/cf201901 r-rgdal
+
+#move the files into the folder you want to work with using Fugu software (on mac)
+
+#now you can submit the job using the nohup command, the & at the end is needed to ensure it continuous running after you log out etc
+nohup Rscript scriptname &
+nohup Rscript Anura_PGLS_final_HPC.R & #example
+
+#thsi will produce a nohup.put file where any errors will be placed, read them with code below or simply export file to computer using Fugu:
+less nohup.out
+
+#to rename output file
+nohup Rscript Test_file2.R > nohup4.out &
+
+#check what is running, this is where you get the PID number (job number) 
+top -c
+
+#if you accidentally put on multiple jobs or need to kill it for another reason (make sure you don't kill other peoples jobs)
+kill PID_number
+
+nohup Rscript RenameFilesinDirectoryhighfintolowercase.R &
