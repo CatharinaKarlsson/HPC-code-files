@@ -1,0 +1,24 @@
+#########################################If you need a specific R version + how to solve soundecology package issue 
+######################################### 
+#first create a new conda environment
+#the reason you create a new environment under you user is to ensure that the R version and package installations are contained
+#in that environment, it ensures that there are no issues and interferences with other users or your other installations
+conda create -n Acoustic5
+
+conda activate Acoustic5
+
+#tell what packages are available to install
+conda search r-base
+
+#install version
+conda install -c conda-forge r-base=3.6.1
+
+#isntall packages that sound ecology fail with Note that it is important to install all the packages from the 
+#conda-forge channel in order for the dependencies to be resolved 
+#way of solving it was to clean packages with tarballs then manually install first units, then sf and then oce. After that install sound ecology through an R script. 
+conda install -c conda-forge r-units
+conda install -c conda-forge r-sf
+conda install -c conda-forge r-oce
+conda install -c conda-forge r-lubridate
+
+nohup Rscript AcoustcPackageInstallationSoundecology.R &
